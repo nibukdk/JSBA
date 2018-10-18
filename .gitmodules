@@ -1,0 +1,3 @@
+[submodule "angularFrontend"]
+	path = angularFrontend
+	url = https://github.com/nibukdk/recipe-box-angular-side.git
