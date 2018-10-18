@@ -24,21 +24,18 @@ router.get('/home', function(req, res) {
 });
 
 //Create A new Recipe Item
-router.get("/home/new", function(req, res) {
 
-  res.send("Recipe Create New");
-});
 router.post("/home/new", function(req, res) {
   //let ingredient = req.body.ingredient.map(ingredient => ingredient);
+  console.log(req.body)
   let ingredient =req.body.ingredients.split(",").map(ingredient => ingredient);
 
-
+  console.log(ingredient);
   let title = req.body.name,
     desc = req.body.description
-    img = req.body.image,
+    img = req.body.image;
 
-
-    console.log(ingredient);
+    
 
   Recipe.create({
     name: title,
@@ -59,13 +56,14 @@ router.get("/home/:id/details", function(req, res) {
   res.send("Recipe Details");
 });
 //Edit Recipe
-router.get("/home/:id/details/edit", function(req, res) {
+router.get("/home/:id/details/update", function(req, res) {
 
   Recipe.findById(req.params.id, function(err, foundRecipe) {
     if (err) {
       return err;
     } else {
-      res.json(foundRecipe)
+      res.json(foundRecipe);
+      console.log(foundRecipe);
     }
 
   });
@@ -73,8 +71,9 @@ router.get("/home/:id/details/edit", function(req, res) {
 
 //Update Recipe Post
 
-router.put("/home/:id/details", function(req, res) {
-  let ingredient = req.body.ingredient.map(ingredient => ingredient);
+router.put("/home/:id/details/update", function(req, res) {
+  console.log(req.body.ingredients);
+  let ingredient =req.body.ingredients.split(",").map(ingredient => ingredient);
   let title = req.body.name,
     desc = req.body.description
   img = req.body.image;
@@ -85,11 +84,11 @@ router.put("/home/:id/details", function(req, res) {
     image: img,
     ingredients: ingredient
 
-  }, function(err, foundRecipe) {
+  }, function(err, newRecipe) {
     if (err) {
       return err;
     } else {
-      res.json(foundRecipe)
+      res.json(newRecipe)
 
     }
 

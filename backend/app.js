@@ -25,10 +25,16 @@ app.use(bodyParser.json());
 //app.use(express.static(path.join(__dirname,'front-end')));
 
 //Home page
-app.get('/', function(req, res) {
-  res.send("This is home page.");
-});
 
+app.get('/', function(req, res) {
+  Recipe.find({}, function(err, data) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(data);
+    }
+  });
+});
 app.use(router);
 
 app.listen(PORT, function() {
