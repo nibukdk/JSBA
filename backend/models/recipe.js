@@ -9,7 +9,15 @@ let RecipeSchema = mongoose.Schema({
   name:String,
   description:String,
   image:String,
-  ingredients:[ String ]
+  ingredients:[ String ],
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  created_by:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 const Recipe = mongoose.model('Recipe', RecipeSchema);
 
